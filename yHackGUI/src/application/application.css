@@ -1,10 +1,4 @@
-#pane{
-	-fx-background-image: url("/Users/jfoster/Documents/Pixart/wXP.jpg");
-    -fx-background-repeat: stretch;   
-    -fx-background-size: 900 506;
-    -fx-background-position: center center;
-    -fx-effect: dropshadow(three-pass-box, #828282, 30, 0.5, 0, 0);
-}
+
 .button{
     -fx-border-color: transparent;
     -fx-border-width: 50;
@@ -12,26 +6,27 @@
     -fx-background-color: transparent;
     -fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 5em; /* 12 */
-    -fx-text-fill: #828282;
+    -fx-text-fill: white;
     -fx-alignment: center ;
 
 }
 
 .button:focused {
-    -fx-border-color: transparent, black;
+    -fx-border-color: transparent, white;
     -fx-border-width: 15, 15;
     -fx-border-radius: 1000px;
     -fx-border-style: solid
 }
 
 .button:pressed {
-    -fx-background-color: black;
-    -fx-text-fill: white;
+    -fx-background-color: white;
+    -fx-text-fill: grey;
 }
 
 .label{
 	-fx-font-family:"Segoe UI", Helvetica, Arial, sans-serif;
 	-fx-font-size: 2.5em;
+	-fx-text-fill: white;
 }
 
 #slider{
