@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
@@ -38,14 +39,17 @@ import yhacks2018.VideoReader;
 import yhacks2018.ImageReader;
 
 public class Controller  {
+	int skipValue = 0;
 	@FXML
-	private Label label1 ;
+	private Label frameHop = new Label("Frame Skip");
 	@FXML
-	private Label label2 ;
+	private Label frameHopNum = new Label("0");
 
 	@FXML
 	private Button File;
 
+	@FXML
+	private Slider slider = new Slider(0,100,0);
 	@FXML
 	private ProgressBar progressBar;
 	public static ProgressBar statprogressBar;
@@ -89,6 +93,13 @@ public class Controller  {
 
 	} 
 	*/
+    public void initialize() {
+        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
+        	frameHopNum.setText(Integer.toString((int)slider.getValue()));
+        	skipValue = Integer.parseInt(frameHopNum.getText());
+        });
+    }
+
 	@FXML
 	public void onFileClick(MouseEvent event) throws Exception, IOException {
 		 int position = 0;
@@ -104,14 +115,15 @@ public class Controller  {
 		File file = chooser.showOpenDialog(new Stage());
 		VideoReader a = new VideoReader(file.toString(), "/Users/jfoster/Documents/yhacks/images");
 		File.setVisible(false);
-		ArrayList<javafx.scene.paint.Color> newList = a.videoToImg("jpg", 200);
+		ArrayList<javafx.scene.paint.Color> newList = a.videoToImg("jpg", skipValue);
 		GridPane gridPane = new GridPane();
-		gridPane.setPrefHeight(360);
-		gridPane.setPrefWidth(640);
+		gridPane.setPrefHeight(720);
+		gridPane.setPrefWidth(1280);
 		Stage stage = new Stage();
-		Scene scene = new Scene(gridPane, 640, 360);
+		Scene scene = new Scene(gridPane, 1280, 720);
 		stage.setScene(scene);
 		stage.setTitle("Picture");
+		stage.setResizable(false);
 		stage.show();
 		double w = (double) gridPane.getWidth() / newList.size();
 		
@@ -124,7 +136,11 @@ public class Controller  {
 			gridPane.setColumnIndex(rec, i);
 			gridPane.getChildren().add(rec);
 		}
-
 		
-		}
 	}
+	/*@FXML
+	public void onDragDetected(MouseEvent event) {
+		frameHopNum.setText(Integer.toString((int)slider.getValue()));
+		
+	}*/
+}
