@@ -32,6 +32,7 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception{
+		
 		this.primaryStage = primaryStage;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI.fxml"));
 	    Parent root = loader.load();
@@ -39,7 +40,7 @@ public class Main extends Application {
 	    this.primaryStage.setScene(scene);
 	    this.primaryStage.show();
 	    
-	   scene.getStylesheets().add("application.css");
+	    scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
 	    
 	}
 	
@@ -48,3 +49,4 @@ public class Main extends Application {
 		launch(args);
 	}
 }
+
